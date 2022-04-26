@@ -23,15 +23,15 @@ namespace ECommerceAPI.Persistence.Repositories
         public DbSet<T> Table => _context.Set<T>();
 
         public IQueryable<T> GetAll()
-            => Table;       
+            => Table;
 
         public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method)
             => await Table.FirstOrDefaultAsync(method);
 
         public IQueryable<T> GetWhere(Expression<Func<T, bool>> method)
-            =>Table.Where(method);
+            => Table.Where(method);
 
         public async Task<T> GetByIdAsync(string id)
-            => await Table.FirstOrDefaultAsync(data=>data.ID == Guid.Parse(id));
+            => await Table.FindAsync(Guid.Parse(id));
     }
 }
