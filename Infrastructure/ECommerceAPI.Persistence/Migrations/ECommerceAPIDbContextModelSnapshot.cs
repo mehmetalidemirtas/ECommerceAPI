@@ -35,6 +35,9 @@ namespace ECommerceAPI.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("ID");
 
                     b.ToTable("Customers");
@@ -53,19 +56,19 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("CustomerID1")
+                    b.Property<Guid>("CustomerID")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerID1");
+                    b.HasIndex("CustomerID");
 
                     b.ToTable("Orders");
                 });
@@ -83,11 +86,14 @@ namespace ECommerceAPI.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("Stock")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ID");
 
@@ -113,7 +119,7 @@ namespace ECommerceAPI.Persistence.Migrations
                 {
                     b.HasOne("ECommerceAPI.Domain.Entities.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerID1")
+                        .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
